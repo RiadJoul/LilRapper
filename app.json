@@ -1,0 +1,7 @@
+{
+  "name": "LilRapper",
+  "displayName": "LilRapper",
+  "expo": {
+    "plugins": ["@react-native-voice/voice"]
+  }
+}
