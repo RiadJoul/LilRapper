@@ -13,7 +13,7 @@
       <li><a href="#builtwith">Built with</a></li>
    </ol>
 </details>
-<!-- ABOUT THE PROJECT --> ## About The Project Lil Rapper is a IOS and Android application the let's help you make a good full freestyle with good lines and amazing rhymes Here's why: * Your time should be focused on creating some logical meaningful freestyle lines without wasting it on "what rhymes with orange" or "what would be a good rhyme to * It's should be easy to access this kind of service such as your phone * You should be able to share it with your friends to show them how good of a freestyler are you 
+<!-- ABOUT THE PROJECT --> # About The Project Lil Rapper is a IOS and Android application the let's help you make a good full freestyle with good lines and amazing rhymes Here's why: * Your time should be focused on creating some logical meaningful freestyle lines without wasting it on "what rhymes with orange" or "what would be a good rhyme to * It's should be easy to access this kind of service such as your phone * You should be able to share it with your friends to show them how good of a freestyler are you 
 <p align="right">(<a href="#top">back to top</a>)</p>
-### Built With This section should list any major frameworks/libraries used to bootstrap my project.<br> * [React Native](https://reactnative.dev)<br> * [Firebase](https://firebase.google.com) 
+# Built With This section should list any major frameworks/libraries used to bootstrap my project.<br> * [React Native](https://reactnative.dev)<br> * [Firebase](https://firebase.google.com) 
 <p align="right">(<a href="#top">back to top</a>)</p>
