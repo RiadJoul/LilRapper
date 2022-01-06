@@ -1,34 +1,39 @@
-import React, {useState,useEffect} from 'react';
-
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import Theme from '../constants/theme';
 
 import {
   View,
   Text,
-  Button,
   Image,
   TouchableOpacity,
   StyleSheet,
   Dimensions,
 } from 'react-native';
 
-import Voice, {
-  SpeechResultsEvent,
-  SpeechErrorEvent,
-} from "@react-native-voice/voice";
+import Voice from '@react-native-voice/voice';
+import theme from '../constants/theme';
 
 const Rap = () => {
-  const [results, setResults] = useState([]);
+  const API =
+    'https://rhymebrain.com/talk?function=getRhymes&maxResults=20&word=';
+  //for getting the matching rhymes
+  const [rhymes, setRhymes] = useState([]);
+
+  //for speech to text and recording freestyle
+  const [freestyle, setFreestyle] = useState([]);
   const [isListening, setIsListening] = useState(false);
 
   useEffect(() => {
     function onSpeechResults(e) {
-      setResults(e.value[0]);
-      console.log('results: ' + e.value[0]);
       //add line to the freestyle
-
+      setFreestyle(freestyle => [...freestyle, e.value[0] + ', ']);
       //finding the last word's rhymes
-      
+      let line = e.value[0];
+      axios.get(API + line.split(' ').pop()).then(res => {
+        setRhymes(res.data);
+      });
+      setIsListening(false);
     }
     function onSpeechError(e) {
       console.error(e);
@@ -46,8 +51,7 @@ const Rap = () => {
         await Voice.stop();
         setIsListening(false);
       } else {
-        setResults([]);
-        await Voice.start("en-US");
+        await Voice.start('en-US');
         setIsListening(true);
       }
     } catch (e) {
@@ -67,9 +71,12 @@ const Rap = () => {
               marginTop: 40,
               fontSize: 18,
               fontStyle: 'italic',
+              marginHorizontal:15
             },
           ]}>
-          Press start and spit some 🔥
+          {
+            isListening ? '...' : 'Press start and spit some 🔥'
+          }
         </Text>
         <TouchableOpacity
           onPress={toggleListening}
@@ -94,34 +101,56 @@ const Rap = () => {
               marginTop: 40,
               fontSize: 18,
               fontStyle: 'italic',
+              opacity: 0.9,
             },
           ]}>
-          " Your freestyle will be shown here "
+          {freestyle.length != 0
+            ? freestyle
+            : '" Your freestyle will be shown here "'}
         </Text>
-      {
-        results.map((result, index) => {
-          return <Text key={`result-${index}` } style={[
-            styles.buttonText,
-            {
-              color: Theme.COLORS.WHITE,
-              marginTop: 160,
-              fontSize: 17,
-              fontStyle: 'italic',
-              opacity: 0.7,
-            },
-          ]}>{result}</Text>;
-        })
-      }
+        {rhymes.length == 0 ? (
+          <Text
+            style={[
+              styles.buttonText,
+              {
+                color: Theme.COLORS.WHITE,
+                marginTop: 160,
+                fontSize: 14,
+                fontStyle: 'italic',
+                opacity: 0.7,
+              },
+            ]}>
+            ** Matching rhymes will be shown here **
+          </Text>
+        ) : (
+          <Text
+            style={[
+              styles.buttonText,
+              {
+                color: Theme.COLORS.WHITE,
+                marginTop: 160,
+                fontSize: 17,
+                fontStyle: 'italic',
+                opacity: 0.7,
+                marginHorizontal:10
+              },
+            ]}>
+            {rhymes.map((rhyme, index) => {
+            return <Text key={`result-${index}`}>{rhyme.word},   </Text>;
+          })}
+          </Text>
+          
+        )}
       </View>
       <View style={styles.footer}>
-        <TouchableOpacity style={[styles.button, {backgroundColor: '#BB4228'}]}>
-          <Text style={[styles.buttonText, {color: '#fff'}]}>
-            Sign out{' '}
-            <Image
-              style={[styles.signout]}
-              source={require('../assets/signout.png')}
-            />
-          </Text>
+        <TouchableOpacity style={[styles.button]}>
+          <Text style={[styles.text,{color:theme.COLORS.WHITE}]}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button]}>
+          <Text style={[styles.text,{color:theme.COLORS.WHITE}]}>Freestyles</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button]}>
+          <Text style={[styles.text,{color:theme.COLORS.WHITE}]}>Share</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -142,7 +171,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: Theme.COLORS.PRIMARY,
+    backgroundColor: Theme.COLORS.PRIMARYFOCUS,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     paddingVertical: 10,
@@ -153,20 +182,22 @@ const styles = StyleSheet.create({
     color: Theme.COLORS.WHITE,
   },
   body: {
-    flex: 10,
+    flex: 12,
     marginTop: 10,
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
   footer: {
     flex: 1,
-    backgroundColor: '#ededed',
+    flexWrap:'wrap',
+    justifyContent:'space-between',
+    backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
-    paddingVertical: 10,
-    paddingHorizontal: 30,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingVertical: 15,
+
   },
   logo: {
     width: height_logo,

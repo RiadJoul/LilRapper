@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     flex: 1,
-    backgroundColor: "#ededed",
+    backgroundColor: Theme.COLORS.PRIMARYFOCUS,
     justifyContent: "center",
     alignItems: "center",
     borderTopLeftRadius: 40,
