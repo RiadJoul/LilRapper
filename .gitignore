@@ -1,7 +1,10 @@
+#google-services && firebase
+android/app/google.services.json
+
 # OSX
 #
 .DS_Store
-
+.env
 # Xcode
 #
 build/

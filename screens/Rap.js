@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Theme from '../constants/theme';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {
   View,
@@ -12,9 +13,11 @@ import {
 } from 'react-native';
 
 import Voice from '@react-native-voice/voice';
-import theme from '../constants/theme';
+import useAuth from '../services/useAuth';
 
 const Rap = () => {
+  const {signOut} = useAuth();
+  const [loading, setLoading] = useState(false);
   const API =
     'https://rhymebrain.com/talk?function=getRhymes&maxResults=20&word=';
   //for getting the matching rhymes
@@ -30,8 +33,10 @@ const Rap = () => {
       setFreestyle(freestyle => [...freestyle, e.value[0] + ', ']);
       //finding the last word's rhymes
       let line = e.value[0];
+      setLoading(true);
       axios.get(API + line.split(' ').pop()).then(res => {
         setRhymes(res.data);
+        setTimeout(() => setLoading(false), 500);
       });
       setIsListening(false);
     }
@@ -71,12 +76,10 @@ const Rap = () => {
               marginTop: 40,
               fontSize: 18,
               fontStyle: 'italic',
-              marginHorizontal:15
+              marginHorizontal: 15,
             },
           ]}>
-          {
-            isListening ? '...' : 'Press start and spit some 🔥'
-          }
+          {isListening ? '...' : 'Press start and spit some 🔥'}
         </Text>
         <TouchableOpacity
           onPress={toggleListening}
@@ -108,6 +111,12 @@ const Rap = () => {
             ? freestyle
             : '" Your freestyle will be shown here "'}
         </Text>
+        {loading ? (
+          <Image
+            style={{width: 188, height: 188, marginTop: 2, marginRight: 8}}
+            source={require('../assets/loading.gif')}
+          />
+        ) : null}
         {rhymes.length == 0 ? (
           <Text
             style={[
@@ -123,35 +132,59 @@ const Rap = () => {
             ** Matching rhymes will be shown here **
           </Text>
         ) : (
-          <Text
-            style={[
-              styles.buttonText,
-              {
-                color: Theme.COLORS.WHITE,
-                marginTop: 160,
-                fontSize: 17,
-                fontStyle: 'italic',
-                opacity: 0.7,
-                marginHorizontal:10
-              },
-            ]}>
-            {rhymes.map((rhyme, index) => {
-            return <Text key={`result-${index}`}>{rhyme.word},   </Text>;
-          })}
-          </Text>
-          
+          [
+            !loading ? (
+              <Text
+                style={[
+                  styles.buttonText,
+                  {
+                    color: Theme.COLORS.WHITE,
+                    marginTop: 160,
+                    fontSize: 17,
+                    fontStyle: 'italic',
+                    opacity: 0.7,
+                    marginHorizontal: 20,
+                  },
+                ]}>
+                {rhymes.map((rhyme, index) => {
+                  return <Text key={`result-${index}`}>{rhyme.word}, </Text>;
+                })}
+              </Text>
+            ) : null,
+          ]
         )}
       </View>
       <View style={styles.footer}>
-        <TouchableOpacity style={[styles.button]}>
-          <Text style={[styles.text,{color:theme.COLORS.WHITE}]}>Home</Text>
+        <TouchableOpacity
+          onPress={signOut}
+          style={[
+            styles.button,
+            {
+              backgroundColor: 'red',
+              width: 200,
+
+            },
+          ]}>
+          <Text style={[styles.buttonText, {color: Theme.COLORS.WHITE}]}>
+          sign out
+          </Text>
+          <Icon name="sign-out" size={15} style={{ marginLeft: 8,marginTop:8 }}/>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.button]}>
-          <Text style={[styles.text,{color:theme.COLORS.WHITE}]}>Freestyles</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.button]}>
-          <Text style={[styles.text,{color:theme.COLORS.WHITE}]}>Share</Text>
-        </TouchableOpacity>
+
+        {/* <TouchableOpacity
+          style={[
+            styles.button,
+            {
+              backgroundColor: Theme.COLORS.PRIMARYFOCUS,
+              width: 130,
+              marginLeft:8
+            },
+          ]}>
+          <Text style={[styles.buttonText, {color: Theme.COLORS.WHITE}]}>
+          Share
+          </Text>
+          <Icon name="share" size={12} style={{ marginLeft: 8,marginTop:10 }}/>
+        </TouchableOpacity> */}
       </View>
     </View>
   );
@@ -171,7 +204,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: Theme.COLORS.PRIMARYFOCUS,
+    backgroundColor: Theme.COLORS.BLACK,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     paddingVertical: 10,
@@ -182,22 +215,19 @@ const styles = StyleSheet.create({
     color: Theme.COLORS.WHITE,
   },
   body: {
-    flex: 12,
+    flex:10,
     marginTop: 10,
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
   footer: {
     flex: 1,
-    flexWrap:'wrap',
-    justifyContent:'space-between',
-    backgroundColor: 'transparent',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'center',
-    alignItems: 'center',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     paddingVertical: 15,
-
   },
   logo: {
     width: height_logo,
@@ -212,10 +242,9 @@ const styles = StyleSheet.create({
     height: 20,
   },
   button: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection:'row',
     justifyContent: 'center',
-    paddingHorizontal: 40,
+    textAlign: 'center',
     paddingVertical: 5,
     marginTop: 10,
     borderRadius: 10,

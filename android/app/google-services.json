@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1098608978718",
+    "project_id": "lil-rapper",
+    "storage_bucket": "lil-rapper.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098608978718:android:04e4613a4395b13663f70f",
+        "android_client_info": {
+          "package_name": "com.lilrapper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1098608978718-gc87d8fgdivfguh0au1n0kagm280bt3t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lilrapper",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "1098608978718-qpcr2tqtan0k6176dqjd4dsj6m4r4mgk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClEUX9SqqI8O8qv45yIOgZuTnaqw8ErE0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1098608978718-qpcr2tqtan0k6176dqjd4dsj6m4r4mgk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
