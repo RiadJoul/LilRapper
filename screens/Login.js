@@ -13,7 +13,7 @@ import {
 import useAuth from '../services/useAuth';
 
 const Login = () => {
-  const {signInWithGoogle,loading} = useAuth();
+  const {signInWithGoogle, loading} = useAuth();
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -29,8 +29,19 @@ const Login = () => {
           source={require('../assets/logo.png')}
         />
         <TouchableOpacity
-          style={[styles.button, {backgroundColor: '#fff'}]}
-          onPress={() => {signInWithGoogle();}}>
+          style={{
+            backgroundColor: '#fff',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            paddingHorizontal: 55,
+            paddingVertical: 13,
+            marginTop: 10,
+            borderRadius: 10,
+          }}
+          onPress={() => {
+            signInWithGoogle();
+          }}>
           <Image
             style={styles.icons}
             source={require('../assets/googlelogo.png')}
@@ -62,7 +73,7 @@ const height_logo = height * 0.1;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
+    backgroundColor: '#06032e',
   },
   header: {
     flex: 2,

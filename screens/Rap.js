@@ -170,8 +170,8 @@ const Rap = () => {
           </Text>
           <Icon name="sign-out" size={15} style={{ marginLeft: 8,marginTop:8 }}/>
         </TouchableOpacity>
-
-        {/* <TouchableOpacity
+        {
+          rhymes.length != 0 ? <TouchableOpacity
           style={[
             styles.button,
             {
@@ -184,7 +184,8 @@ const Rap = () => {
           Share
           </Text>
           <Icon name="share" size={12} style={{ marginLeft: 8,marginTop:10 }}/>
-        </TouchableOpacity> */}
+        </TouchableOpacity> : null
+        }
       </View>
     </View>
   );
