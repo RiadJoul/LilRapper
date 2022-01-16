@@ -86,7 +86,7 @@ const Rap = () => {
           style={[
             styles.button,
             {
-              backgroundColor: Theme.COLORS.PRIMARYFOCUS,
+              backgroundColor: Theme.COLORS.PRIMARY,
               width: 200,
               marginTop: 40,
             },
@@ -175,7 +175,7 @@ const Rap = () => {
           style={[
             styles.button,
             {
-              backgroundColor: Theme.COLORS.PRIMARYFOCUS,
+              backgroundColor: Theme.COLORS.PRIMARY,
               width: 130,
               marginLeft:8
             },

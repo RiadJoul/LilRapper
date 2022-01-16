@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     flex: 1,
-    backgroundColor: '#000000',
+    backgroundColor: Theme.COLORS.PRIMARYFOCUS,
     justifyContent: 'center',
     alignItems: 'center',
     borderTopLeftRadius: 40,
