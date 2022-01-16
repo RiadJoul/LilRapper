@@ -1,7 +1,7 @@
 <div id="top"></div>
 <!-- PROJECT SHIELDS --> <!-- PROJECT LOGO --> <br /> 
 <div align="center">
-   <a href="#"> <img src="./assets/logo.png" alt="LilRapper" width="180" height="140"> </a> 
+   <a href="#"> <img src="./assets/logo.png" alt="LilRapper" width="280" height="180"> </a> 
    <h3 align="center">Lil Rapper</h3>
    <p align="center"> <br /> <a href="https://github.com/RiadJoul/LilRapper"><strong>Explore the docs »</strong></a> <br /> <br /> <a href="https://github.com/othneildrew/Best-README-Template">Download on The App store</a> · <a href="https://github.com/othneildrew/Best-README-Template/issues">Download on the Playstore</a> </p>
 </div>
