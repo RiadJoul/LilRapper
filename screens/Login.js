@@ -35,7 +35,7 @@ const Login = () => {
             flexWrap: 'wrap',
             justifyContent: 'center',
             paddingHorizontal: 55,
-            paddingVertical: 13,
+            paddingVertical: 8,
             marginTop: 10,
             borderRadius: 10,
           }}
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'center',
     paddingHorizontal: 60,
-    paddingVertical: 13,
+    paddingVertical: 8,
     marginTop: 10,
     borderRadius: 10,
   },
